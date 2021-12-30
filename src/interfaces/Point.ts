@@ -1,4 +1,4 @@
 export default interface Points{
     max: number;
-    incerement: number;
+    increment: number;
 }

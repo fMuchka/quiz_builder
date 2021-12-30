@@ -21,5 +21,17 @@ export default class Quiz {
         this.themes[t.id] = t;
     }
 
+    addQuestion(q: Question): void {
+        this.questions[q.id] = q;
+    }
+
+    removeQuestion(q: Question): void {
+        delete this.questions[q.id];
+    }
+
+    removeTheme(t: Theme): void{
+        delete this.themes[t.id];
+    }
+
     get quizThemes() : Record<Theme["id"], Theme> { return this.themes }
 }
