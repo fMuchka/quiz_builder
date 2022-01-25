@@ -1,6 +1,6 @@
 import Theme from "./Theme";
 import Question from "./Question";
-import QuizMessenger from "@/interfaces/QuizMessenger";
+import QuizConfig from "@/interfaces/QuizConfig";
 import Media from "@/interfaces/Media";
 
 export default class Quiz {
@@ -9,7 +9,7 @@ export default class Quiz {
     private questions: Record<Question["id"], Question> = {};   // Question objects map
     private mediaFiles: Record<Media["id"], Media["path"]> = {};  // Media files
 
-    constructor(obj?: QuizMessenger) {
+    constructor(obj?: QuizConfig) {
         this.flow = obj === undefined ? [] : obj?.flow;
         this.themes = obj === undefined ? {} : obj?.themes;
         this.questions = obj === undefined ? {} : obj?.questions;

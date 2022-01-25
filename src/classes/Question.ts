@@ -1,6 +1,6 @@
 import Media from "@/interfaces/Media";
 import Points from "@/interfaces/Point";
-import QuestionMessenger from "@/interfaces/QuestionMessenger";
+import QuestionConfig from "@/interfaces/QuestionConfig";
 
 export default class Question{
     private text: string;
@@ -9,7 +9,7 @@ export default class Question{
     private points: Points;
     public id: string;
 
-    constructor (id : string, obj? : QuestionMessenger){
+    constructor (id : string, obj? : QuestionConfig){
         this.text = obj === undefined ? "" : obj.text;
         this.answer = obj === undefined ? "" : obj.answer;
         this.media = obj === undefined ? "" : obj.media;

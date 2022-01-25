@@ -1,14 +1,16 @@
 import Question from "./Question";
+import ThemeConfig from "@/interfaces/ThemeConfig"
+
 
 export default class Theme {
     public id: string;
     private text: string;
     private questions: Question[];
 
-    constructor(id: string, text: string, questions: Question[]) {
+    constructor(id: string, obj? : ThemeConfig) {
         this.id = id;
-        this.text = text;
-        this.questions = questions;
+        this.text = obj === undefined ? "" : obj?.text;
+        this.questions = obj === undefined ? [] : obj?.questions;
     }
 
     setLabel(t: string): void{
