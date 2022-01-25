@@ -7,12 +7,15 @@
 </template>
 
 <script>
+
+import { ACTIONS } from "../store/actions.type"
+
 export default {
     name: "Home",
 
     methods: {
         createQuiz(){
-            this.$store.dispatch("createQuiz");
+            this.$store.dispatch(ACTIONS.CREATE_QUIZ);
 
             this.goNext();
         },
@@ -36,21 +39,21 @@ export default {
 }
 
 button {
-  grid-area: button;
-  height: 65px;
-  width: 500px;
-  display: flex;
-  align-self: center;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background-color: #ece8e8;
-  font-size: 24px;
-  color: #0d5b9e;
-  font-weight: bold;
-  filter: drop-shadow(1px 1px 1px black);
-  cursor: pointer;
-  margin: 15px;
+    grid-area: button;
+    height: 5rem;
+    width: 50rem;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #ece8e8;
+    font-size: 24px;
+    color: #0d5b9e;
+    font-weight: bold;
+    filter: drop-shadow(1px 1px 1px black);
+    cursor: pointer;
+    margin: 15px;
 }
 
 button:disabled{

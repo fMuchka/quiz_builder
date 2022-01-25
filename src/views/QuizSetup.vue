@@ -72,6 +72,9 @@ import Question from "@/classes/Question";
 
 import QuestionEdit from "@/components/QuestionEdit.vue";
 
+import { MUTATIONS } from "@/store/mutations.type";
+import { mapGetters } from "vuex";
+
 export default {
   name: "QuizSetup",
 
@@ -88,10 +91,8 @@ export default {
   },
 
   computed: {
-    quiz() {
-      return this.$store.getters["quiz"];
-    },
-
+    ...mapGetters(["quiz", "themeID", "questionID"]),
+    
     themes() {
       return this.quiz.quizThemes;
     },
@@ -104,25 +105,25 @@ export default {
 
   methods: {
     addTheme() {
-      const id = this.$store.getters["themeID"];
+      const id = this.themeID;
       const theme = new Theme(id, "", []);
 
-      this.$store.commit("addTheme", theme);
+      this.$store.commit(MUTATIONS.ADD_THEME, theme);
     },
 
     addQuestion() {
-      const id = this.$store.getters["questionID"];
+      const id = this.questionID;
       const question = new Question(id, undefined);
       const theme = this.currentTheme;
 
-      this.$store.commit("addQuestion", { question, theme });
+      this.$store.commit(MUTATIONS.ADD_QUESTION, { question, theme });
     },
 
     updateThemeLabel() {
       const theme = this.currentTheme;
       const newLabel = event.target.value;
 
-      this.$store.commit("updateThemeLabel", { newLabel, theme });
+      this.$store.commit(MUTATIONS.UPDATE_THEME_LABEL, { newLabel, theme });
     },
 
     editQuestion(item){
@@ -162,13 +163,13 @@ export default {
         const question = this.editQuestionObject;
         const theme = this.currentTheme;
 
-        this.$store.commit("deleteQuestion", { question, theme });
+        this.$store.commit(MUTATIONS.DELETE_QUESTION, { question, theme });
 
         this.editQuestionActive = false;
     },
 
     deleteTheme(theme){
-        this.$store.commit("deleteTheme", theme);
+        this.$store.commit(MUTATIONS.DELETE_THEME, theme);
 
         const themeKeys = Object.keys(this.themes);
         const nextKey = themeKeys.indexOf(theme) + 1;
@@ -212,7 +213,7 @@ body {
 
 button {
   grid-area: button;
-  height: 65px;
+  height: 3.25rem;
   display: flex;
   align-self: center;
   align-items: center;
@@ -264,12 +265,11 @@ button:hover{
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  height: 60px;
-  width: 30px;
+  height: 5rem;
   cursor: pointer;
   font-size: 20px;
   margin: 0 5px;
-  min-width: 60px;
+  min-width: 5rem;
   background-color: #dbd6d6;
   border-radius: 5px;
 }
@@ -297,7 +297,7 @@ button:hover{
 }
 
 #theme-label {
-    width: 300px;
+  width: 75%;
 }
 
 #question-list {
@@ -310,10 +310,17 @@ button:hover{
 
 #label-wrapper {
     grid-area: label;
-    width: 400px;
+    width: 50rem;
+    height: 3rem;
     align-self: center;
     display: flex;
     justify-content: center;
+}
+
+#label-wrapper > label {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
 }
 
 #question-list .section-title {
@@ -329,8 +336,8 @@ button:hover{
   grid-area: question;
   display: grid;
   grid-template-columns: 1fr;
-  max-height: 450px;
-  height: 450px;
+  max-height: 50vh;
+  height: 50vh;
   width: 80vw;
   overflow-y: scroll;
   justify-items: center;
@@ -342,8 +349,8 @@ button:hover{
   background-color: #dbd6d6;
   width: 95%;
   margin: 5px;
-  height: 40px;
-  line-height: 40px;
+  height: 3.5rem;
+  line-height: 3.5rem;
   display: block;
   align-items: center;
   justify-content: center;

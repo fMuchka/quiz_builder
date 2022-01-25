@@ -35,6 +35,9 @@
 
 <script>
 import Question from "@/classes/Question";
+
+import { MUTATIONS } from "@/store/mutations.type";
+
 export default {
   name: "QuestionEdit",
 
@@ -64,28 +67,28 @@ export default {
       const value = event.target.value;
       const question = this.question;
 
-      this.$store.commit("updateQuestionText", { question, value });
+      this.$store.commit(MUTATIONS.UPDATE_QUESTION_TEXT, { question, value });
     },
 
     updateAnswer() {
       const value = event.target.value;
       const question = this.question;
 
-      this.$store.commit("updateQuestionAnswer", { question, value });
+      this.$store.commit(MUTATIONS.UPDATE_QUESTION_ANSWER, { question, value });
     },
 
     updateMax() {
       const value = event.target.value;
       const question = this.question;
 
-      this.$store.commit("updateQuestionMax", { question, value });
+      this.$store.commit(MUTATIONS.UPDATE_QUESTION_MAX, { question, value });
     },
 
     updateIncrement() {
       const value = event.target.value;
       const question = this.question;
 
-      this.$store.commit("updateQuestionIncrement", { question, value });
+      this.$store.commit(MUTATIONS.UPDATE_QUESTION_INCREMENT, { question, value });
     },
   },
 };
@@ -102,6 +105,6 @@ label {
 }
 
 textarea{
-    height: 80px;
+    height: 20%;
 }
 </style>
